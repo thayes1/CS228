@@ -1,4 +1,5 @@
 // LinkedList.cpp
+//Tyler Hayes
 
 #include <stdlib.h>
 #include "LinkedList.h"
@@ -6,25 +7,35 @@
 // Default constructor, the list is empty to start
 
 LinkedList::LinkedList() {
-   
+    int data;
+    Node* next;
+    data = 0;
+
 }
 
 // Default destructor, must delete all nodes
 
 LinkedList::~LinkedList() {
+    ListNode* ptr;
 
+    for (ptr = head; head; ptr = head) {
+        head = head->next
+            delete ptr;
+    }
 }
 
 // Add a node containing "value" to the front
 
 void LinkedList::InsertFront(double value) {
+    Node* value = NULL;
+
 
 }
 
 // Add a node containing "value" to position "index"
 
 void LinkedList::Insert(double value, unsigned int index) {
-    
+    Node* value = index; 
 
 }
 

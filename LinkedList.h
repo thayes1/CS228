@@ -33,6 +33,9 @@ public:
 private:
     
   // Add class members here
+    Node* head = NULL;
+    Node* curr = NULL;
+    Node* prev = NULL: 
 
 };
 

@@ -8,11 +8,10 @@
 // Default constructor, the list is empty to start
 LinkedList::LinkedList() {
     head = NULL;
-    cur = NULL;
-    next = NULL;
+
 }
 
-// Default destructor, must delete all nodes
+// Default destructor, must delete all nodesP
 
 LinkedList::~LinkedList() {
     ListNode* ptr;
@@ -28,112 +27,109 @@ LinkedList::~LinkedList() {
 void LinkedList::InsertFront(double value) {
     Node* newNode = new Node;
     newNode->data = value;
-    newNode->next = *head;
-    *head = newNode;
+    newNode->next = head;
+    head = newNode;
 }
-
-//One Method
-public class Node {
-	Node* next; //Takes a next value
-	int data; //Declaring some data
-	public Node(int data) {
-		this.data = data;  //Constructor for making the data
-	}
-
-	public class LinkedList {
-		Node head;
-
-		public void append(int data) {
-			if (head == null) {
-				head = new Node(data);
-				return;
-			}
-		}
-		Node current = head; //Node: current = this ->data
-		while (current.next != null) {
-			current = current.next;
-		}
-		current.next = new Node(data);
-	}
-
-	public void prepend(int data) {
-		Node newHead = new Node(data);
-		newHead.next = head;
-		head = newHead;
-	}
-
-	public void deleteWithValue(int data) {
-		if (head == null) return; //If the head is null return
-		if (head.data == data) {  //Head is equal to the next value
-			head = head.next;
-			return;
-		}
-
-		Node current = head;  //Starting at head
-		while (current.next != null) {	//Going through the linked list
-			if (current.next.data == data) { 
-				current.next = current.next.next; //Basically skip over the one you want to delete
-				return;
-			}
-			current = current.next;
-		}
-	}
-	//---------------------------------------
-	
-};
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
-
 
 // Add a node containing "value" to position "index"
 
 void LinkedList::Insert(double value, unsigned int index) {
-    Node* value = index; 
-    Node* newNode = new Node;
-    newNode->value = *index;
-    *index = newNode;
+    curr = NULL;
+    prev = NULL;
+    Node* temp, newNode = NULL; 
+
+    int pos = 0;
+
+    if (index == 0)
+        InsertFront(value);
+
+    if (index > GetLength() + 1)
+        throw 0;
+
+    curr = head;
+    else {
+        while (curr != NULL) { //while we are not at the end of our list
+            if (pos == index) { //when we reach the position we want 
+                newNode = new Node; //create a new node
+                newNode->data = value; //give it the user value
+                newNode->next = curr; //asign new nodes next to index's node
+                prev->next = newNode; //asign the previous node's next to new node 
+            }
+            prev = curr;
+            curr = curr->next; //move over one index 
+            pos++;
+        }
+    }
 }
 
 
 // Return value at position "index"
 
 double LinkedList::GetNode(unsigned int index) {
-    return *index;
+    curr = NULL;
+    curr = head;
+    int pos = 0;
+
+    if (index > GetLength())
+        throw 0;
+
+    while (curr != NULL) {
+        if (pos == index) {
+            return curr->data;
+        }
+        curr = curr->next;
+        pos++;
+    }
+
+    
 }
 
 
 // Return the index of the node containing "value"
 
 unsigned int LinkedList::Search(double value) {
-    return data*;
+    curr = NULL;
+    curr = head;
+    int pos = 0;
+
+    while (curr != NULL) {
+        if (curr->data == value) {
+            return pos;
+        }
+        curr = curr->next;
+        pos++;
+    }
+
+    throw 0;
 }
 
 
 // Delete the node at position "index", return the value that was there
 
 double LinkedList::DeleteNode(unsigned int index) {
-    Node* cur = *head;
-    if (index == *head) {
-        *head = cur->next;
-        delete index;
-        return true;
+    int pos;
+    double info;
+    curr, prev = NULL;
+
+    if (index > GetLength())
+        throw 0;
+
+    if (index == 0) {
+        info = head->data;
+        head = head->next;
+        return info;
     }
 
-    while (cur) {
-        if (cur->next == value) {
-            cur->next = value->next;
-            delete value;
-            return true;
+    curr = head;
+    while (curr != NULL) {
+        if (pos == index) {
+            prev->next = curr->next;
+            curr->next = NULL;
+            delete curr;
         }
-        cur = cur->next;
+        prev = curr;
+        curr = curr->next;
+        pos++;
     }
     return false;
 }
@@ -146,23 +142,23 @@ double LinkedList::DeleteNode(unsigned int index) {
 //Reverse()
 //List: 29-11-2-0-4
 void LinkedList::Reverse() {
-    struct Node* reverse(struct Node** head)
-    {
-        Node* parent = *head;
-        Node* me = parent->next;
-        Node* child = me->next;
+    Node* temp = NULL;
+    curr = NULL;
 
-        parent->next = NULL;
-        while (child) {
-            me->next = parent;
-            parent = me;
-            me = child;
-            child = child->next;
+        curr = head;
+        while (curr != NULL) {
+            Node* newNode = new Node;
+            newNode->data = curr->data;
+            newNode->next = temp;
+            temp = newNode;
+            curr = curr->next;
+                
+            DeleteNode(0);
+
+ 
         }
-        me->next = parent;
-        *head = me;
-        return *head;
-    }
+        head = temp;
+
 }
 
 // Return the number of nodes in the list
